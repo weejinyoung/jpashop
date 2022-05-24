@@ -42,7 +42,7 @@ public class MemberService {
         return memberRepository.findOne(memberId);
     }
 
-    @Transactional
+    @Transactional // "거래" 라는 뜻, 메서드가 포함하는 작업 중 하나라도 실패하면 전체 작업을 취소
     public void update(Long id, String name) {
         Member member = memberRepository.findOne(id);
         member.setName(name);

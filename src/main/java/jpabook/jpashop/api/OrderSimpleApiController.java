@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static java.util.stream.Collectors.*;
 
@@ -32,6 +33,15 @@ public class OrderSimpleApiController {
                 .map(SimpleOrderDto::new)
                 .collect(toList());
     }
+
+    @GetMapping("/api/v3/simple-orders")
+    public List<SimpleOrderDto> ordersV3() {
+        return orderRepository.findAllByWithMemberDelivery().stream()
+                .map(SimpleOrderDto::new)
+                .collect(toList());
+    }
+
+
 
     @Data
     static class SimpleOrderDto {
